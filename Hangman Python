@@ -1,0 +1,38 @@
+import random
+
+# List of words for the game
+word_list = ["python", "java", "ruby", "javascript", "html"]
+
+# Choose a random word from the list
+chosen_word = random.choice(word_list)
+
+# Initialize guessed_word with underscores
+guessed_word = ['_'] * len(chosen_word)
+attempts = 6
+
+# Main game loop
+while attempts > 0:
+    # Display the current state of the word
+    print(" ".join(guessed_word))
+
+    # Ask the player to guess a letter
+    guess = input("Guess a letter: ").lower()
+
+    if guess in chosen_word:
+        # Update guessed_word with correctly guessed letters
+        for i in range(len(chosen_word)):
+            if chosen_word[i] == guess:
+                guessed_word[i] = guess
+    else:
+        # Decrement attempts for incorrect guesses
+        attempts -= 1
+        print(f"Wrong guess! {attempts} attempts left.")
+
+    # Check if the player has guessed the entire word
+    if "".join(guessed_word) == chosen_word:
+        print(f"Congratulations! You guessed the word: {chosen_word}")
+        break
+
+# Check if the player ran out of attempts
+if "".join(guessed_word) != chosen_word:
+    print(f"Out of attempts. The word was: {chosen_word}")
